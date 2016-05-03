@@ -99,7 +99,7 @@ class NioDatagramChannelConfig extends DefaultDatagramChannelConfig {
 
     private final DatagramChannel javaChannel;
 
-    NioDatagramChannelConfig(NioDatagramChannel channel, DatagramChannel javaChannel) {
+    NioDatagramChannelConfig(io.netty.channel.socket.DatagramChannel channel, DatagramChannel javaChannel) {
         super(channel, javaChannel.socket());
         this.javaChannel = javaChannel;
     }

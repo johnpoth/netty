@@ -47,6 +47,15 @@ public class DefaultDatagramChannelConfig extends DefaultChannelConfig implement
     private final DatagramSocket javaSocket;
     private volatile boolean activeOnOpen;
 
+    @Override
+    @SuppressWarnings("deprecation")
+    public Map<ChannelOption<?>, Object> getOptions() {
+        return getOptions(
+                super.getOptions(),
+                SO_BROADCAST, SO_RCVBUF, SO_SNDBUF, SO_REUSEADDR, IP_MULTICAST_LOOP_DISABLED,
+                IP_MULTICAST_ADDR, IP_MULTICAST_IF, IP_MULTICAST_TTL, IP_TOS, DATAGRAM_CHANNEL_ACTIVE_ON_REGISTRATION);
+    }
+
     /**
      * Creates a new instance.
      */
@@ -56,15 +65,6 @@ public class DefaultDatagramChannelConfig extends DefaultChannelConfig implement
             throw new NullPointerException("javaSocket");
         }
         this.javaSocket = javaSocket;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public Map<ChannelOption<?>, Object> getOptions() {
-        return getOptions(
-                super.getOptions(),
-                SO_BROADCAST, SO_RCVBUF, SO_SNDBUF, SO_REUSEADDR, IP_MULTICAST_LOOP_DISABLED,
-                IP_MULTICAST_ADDR, IP_MULTICAST_IF, IP_MULTICAST_TTL, IP_TOS, DATAGRAM_CHANNEL_ACTIVE_ON_REGISTRATION);
     }
 
     @Override
